@@ -1,4 +1,5 @@
 import chisel3._
+import chisel3.util._
 
 /**
  * Example design in Chisel.
@@ -18,18 +19,21 @@ class ChiselTop() extends Module {
   // use bi-directionals as input
   io.uio_oe := 0.U
 
-  val add = WireDefault(0.U(7.W))
-  add := io.ui_in + io.uio_in
-
-  // Blink with 1 Hzq
-  val cntReg = RegInit(0.U(32.W))
   val ledReg = RegInit(0.U(1.W))
-  cntReg := cntReg + 1.U
-  when (cntReg === 25000000.U) {
-    cntReg := 0.U
+  val digitReg = RegInit(0.U(4.W))
+
+  // Blink with 1 Hz
+  val (cnt, tick) = Counter(true.B, 25000000)
+  when (tick) {
     ledReg := ~ledReg
+    digitReg := digitReg + 1.U
+    when (digitReg === 9.U) {
+      digitReg := 0.U
+    }
   }
-  io.uo_out := ledReg ## add
+  val dec = Module(new Decoder)
+  dec.counter := digitReg
+  io.uo_out := ledReg ## dec.segments
 }
 
 object ChiselTop extends App {

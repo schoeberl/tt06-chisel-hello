@@ -1,10 +1,10 @@
 ![](../../workflows/gds/badge.svg) ![](../../workflows/docs/badge.svg) ![](../../workflows/test/badge.svg)
 
-# Tiny Tapeout Chisel Project Template
+# Tiny Tapeout Chisel Hello Project
 
 - Provide info on your project at: [Read the documentation for project](docs/info.md)
 
-This template is intended for projects written in the Chisel hardware construction language.
+This hello world project is intended to show how projects are written in the Chisel hardware construction language.
 To learn more about Chisel, visit the [Chisel website](https://www.chisel-lang.org/)
 or read the free [Chisel book](http://www.imm.dtu.dk/~masca/chisel-book.html).
 
