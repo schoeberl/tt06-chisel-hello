@@ -1,0 +1,3 @@
+[submodule "hello-morse"]
+	path = hello-morse
+	url = git@github.com:schoeberl/hello-morse.git
