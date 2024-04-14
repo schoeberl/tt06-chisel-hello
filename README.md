@@ -8,6 +8,13 @@ This hello world project is intended to show how projects are written in the Chi
 To learn more about Chisel, visit the [Chisel website](https://www.chisel-lang.org/)
 or read the free [Chisel book](http://www.imm.dtu.dk/~masca/chisel-book.html).
 
+Note that this project includes a submodule. Therefore, you need to update with:
+
+```bibtex
+git submodule init
+git submodule update
+```
+
 ## What is Tiny Tapeout?
 
 Tiny Tapeout is an educational project that aims to make it easier and cheaper than ever to get your digital designs manufactured on a real chip.
