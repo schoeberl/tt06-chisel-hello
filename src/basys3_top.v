@@ -22,7 +22,10 @@ module basys3_top (
     output  wire [3:0] vga_g,
     output  wire [3:0] vga_b,
     output  wire vga_hs,
-    output  wire vga_vs
+    output  wire vga_vs,
+
+    output  wire [4:1] jc_upper,    // PMOD JC
+    output  wire [10:7] jc_lower
 );
 
     wire rst_n = ~reset; // Isn't that button low active anyway?
@@ -36,8 +39,8 @@ module basys3_top (
     wire [7:0] ui_in = sw [7:0];
     wire [7:0] uo_out;
     wire [7:0] uio_in = sw [15:8];
-    wire [7:0] uio_out; // TODO: shall go to PMOD, depending on the design
-    wire [7:0] uio_oe;  // ignored
+    wire [7:0] uio_out;
+    wire [7:0] uio_oe = 8'b11111111; // all outputs
 
     tt_um_chisel_hello_schoeberl user_project (
           .ui_in  (ui_in),    // Dedicated inputs
@@ -66,5 +69,8 @@ module basys3_top (
     assign vga_b [3] = uo_out[2];
     assign vga_hs = uo_out[7];
     assign vga_vs = uo_out[3];
+
+    assign jc_upper = uio_out[3:0];
+    assign jc_lower = uio_out[7:4];
 
 endmodule

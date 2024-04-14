@@ -22,18 +22,23 @@ class ChiselTop() extends Module {
   val ledReg = RegInit(0.U(1.W))
   val digitReg = RegInit(0.U(4.W))
 
-  // Blink with 1 Hz
+  // Count with 2 Hz
   val (cnt, tick) = Counter(true.B, 25000000)
   when (tick) {
-    ledReg := ~ledReg
     digitReg := digitReg + 1.U
     when (digitReg === 9.U) {
       digitReg := 0.U
     }
   }
+
   val dec = Module(new Decoder)
   dec.counter := digitReg
-  io.uo_out := ledReg ## dec.segments
+  val seg = Mux(io.ui_in(0), dec.segments, 0.U)
+  io.uo_out := ledReg ## seg
+
+  val morse = Module(new HelloMorse(50000000))
+  ledReg := morse.io.led
+  io.uio_out := morse.io.nshutdown ## 0.U(1.W) ## morse.io.gain ## morse.io.audio ## 0.U(4.W)
 }
 
 object ChiselTop extends App {

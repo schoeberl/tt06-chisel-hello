@@ -4,6 +4,7 @@ scalacOptions ++= Seq(
   "-feature",
   "-language:reflectiveCalls",
 )
+Compile / unmanagedSourceDirectories += baseDirectory.value / "hello-morse/src/main/scala"
 
 // Chisel 3.5
 addCompilerPlugin("edu.berkeley.cs" % "chisel3-plugin" % "3.5.6" cross CrossVersion.full)

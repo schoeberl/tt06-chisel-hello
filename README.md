@@ -15,6 +15,11 @@ git submodule init
 git submodule update
 ```
 
+The project displays a counter on the 7-segment display.
+It also writes our ``hello world`` in Morse on the DP of the 7-segment display.
+Furthermore, it also playes the Morse with PWM on the BIDIR PMOD, connected to
+a PmodAMP2.
+
 ## What is Tiny Tapeout?
 
 Tiny Tapeout is an educational project that aims to make it easier and cheaper than ever to get your digital designs manufactured on a real chip.
